@@ -1,16 +1,17 @@
-import { IsString, IsInt, IsBoolean, IsNotEmpty } from 'class-validator';
-export class UpdateBookDto {
-  @IsString()
-  @IsNotEmpty()
-  title: string;
+import { PartialType } from '@nestjs/mapped-types';
+import { CreateBookDto } from './create-book.dto';
+import { IsOptional } from 'class-validator';
 
-  @IsString()
-  @IsNotEmpty()
-  author: string;
+export class UpdateBookDto extends PartialType(CreateBookDto) {
+  @IsOptional()
+  title?: string;
 
-  @IsInt()
-  year: number;
+  @IsOptional()
+  author?: string;
 
-  @IsBoolean()
+  @IsOptional()
+  year?: number;
+
+  @IsOptional()
   isRead?: boolean;
 }

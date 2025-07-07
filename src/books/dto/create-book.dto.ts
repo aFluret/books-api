@@ -13,5 +13,5 @@ export class CreateBookDto {
   year: number;
 
   @IsBoolean()
-  isRead?: boolean;
+  isRead?: boolean = false;
 }

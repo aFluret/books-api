@@ -7,6 +7,8 @@ import {
   Put,
   Patch,
   Delete,
+  ValidationPipe,
+  UsePipes,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -19,6 +21,7 @@ export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
   @Post()
+  @UsePipes(new ValidationPipe())
   @ApiResponse({ status: 201, description: 'Book successfully created' })
   create(@Body() createBookDto: CreateBookDto) {
     return this.booksService.create(createBookDto);
@@ -35,6 +38,7 @@ export class BooksController {
   }
 
   @Put(':id')
+  @UsePipes(new ValidationPipe())
   update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
     return this.booksService.update(+id, updateBookDto);
   }
